@@ -1,0 +1,27 @@
+.navbar {
+    height: fit-content;
+}
+
+.navbar .navbar-brand {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.nav {
+    margin-left: 40rem;
+}
+
+.nav .navitem {
+    padding-left: 40px;
+}
+
+.nav .navitem .navlink {
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+    margin-top: -20px;
+}
+
+.nav .navitem .selected{
+    color: aqua
+}
