@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router";
-import Home from "./Home/Home";
 import Login from "../Auth/Login";
+import Home from "./Home";
 
 const Body = () => {
     return (
