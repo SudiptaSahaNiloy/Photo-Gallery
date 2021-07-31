@@ -8,10 +8,16 @@ const INITIAL_STATE = {
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
-    if(action.type === actionTypes.ADD_COMMENTS){
-        let comment = action.payload;
-        
+    switch (action.type) {
+        case actionTypes.ADD_COMMENTS:
+            let comment = action.payload;
+            comment.id = state.comments.length;
+            comment.date = new Date().toDateString();
+            return {
+                ...state,
+                comments: state.comments.concat(comment),
+            }
+        default:
+            return state;
     }
-    return state;
 }
-
