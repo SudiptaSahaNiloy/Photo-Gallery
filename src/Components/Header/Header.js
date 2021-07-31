@@ -17,7 +17,7 @@ const Header = () => {
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ms-auto nav " navbar>
                             <NavItem className="navitem">
-                                <NavLink exact activeClassName="selected" to="/" className="navlink">Home</NavLink>
+                                <NavLink exact activeClassName="selected" to="/home" className="navlink">Home</NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar className="navitem">
                                 <DropdownToggle nav caret className="navlink" style={{ marginTop: "-7px" }}>
@@ -25,14 +25,14 @@ const Header = () => {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                        Option 1
+                                        <NavLink exact to="/login" style={{ textDecoration: "none", color: "black" }}>Option1</NavLink>
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Option 2
+                                        <NavLink exact to="/login" style={{ textDecoration: "none", color: "black"}}>Option2</NavLink>
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem>
-                                        Reset
+                                        <NavLink exact to="/home" style={{ textDecoration: "none", color: "black"}}>Reset</NavLink>
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

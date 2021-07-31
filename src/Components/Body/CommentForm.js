@@ -44,7 +44,9 @@ class CommentForm extends Component {
                 <Form onSubmit={this.onSubmitHandler}>
                     <Input type="text" name="author" value={this.state.author} placeholder="Enter your name" required onChange={this.onChangeHandler} /><br />
                     <Input type="textarea" name="comment" value={this.state.comment} placeholder="Enter your comment" required onChange={this.onChangeHandler} /><br />
-                    <Button type="submit">Submit Comment</Button>
+                    <div className="d-flex justify-content-end">
+                        <Button type="submit" color="success">Submit Comment</Button>
+                    </div>
                 </Form>
             </div>
         )

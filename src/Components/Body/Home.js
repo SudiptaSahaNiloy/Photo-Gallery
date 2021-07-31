@@ -4,11 +4,19 @@ import ImageDetail from "./ImageDetail"
 import '../../StyleSheet/Home.css';
 import { Modal, ModalBody, ModalFooter, Button } from "reactstrap";
 import { connect } from "react-redux";
+import { fetchImages, fetchComments } from "../../Redux/actionCreator";
 
 const mapStateToProps = (state) => {
     return ({
         images: state.images,
         comments: state.comments,
+    })
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        fetchImages: () => dispatch(fetchImages()),
+        fetchComments: () => dispatch(fetchComments()),
     })
 }
 
@@ -32,14 +40,26 @@ class Home extends Component {
         })
     }
 
+    componentDidMount() {
+        this.props.fetchImages();
+        this.props.fetchComments();
+        // console.log(this.props.comments);
+    }
+
 
     render() {
-        // console.log(this.state.selectedImage);
-        const image = this.props.images.map((item) => {
-            return (
-                <ImageItem image={item} key={item.id} ImageSelect={this.onImageSelect} />
-            )
-        })
+        let image = null;
+        const Category = "General";
+        if (this.props.images !== null) {
+            const images = this.props.images.filter((img) => {
+                return img.category === Category;
+            })
+            image = images.map((img) => {
+                return(
+                     <ImageItem image={img} key={img.id} ImageSelect={this.onImageSelect} />
+                )
+            })
+        }
 
         let imageDetail = null;
         if (this.state.selectedImage !== null) {
@@ -69,4 +89,4 @@ class Home extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

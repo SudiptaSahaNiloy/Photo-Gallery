@@ -4,37 +4,37 @@
       "id": 0,
       "name": "Image 1",
       "imageSrc": "images/image1.jpg",
-      "category": ""
+      "category": "General"
     },
     {
       "id": 1,
-      "name": "Image 1",
+      "name": "Image 2",
       "imageSrc": "images/image2.jpg",
-      "category": ""
+      "category": "General"
     },
     {
       "id": 2,
-      "name": "Image 1",
+      "name": "Image 3",
       "imageSrc": "images/image3.jpg",
-      "category": ""
+      "category": "Naruto"
     },
     {
       "id": 3,
-      "name": "Image 1",
-      "imageSrc": "images/image4.jpg",
-      "category": ""
+      "name": "Image 4",
+      "imageSrc": "images/image4.png",
+      "category": "Naruto"
     },
     {
       "id": 4,
-      "name": "Image 1",
+      "name": "Image 5",
       "imageSrc": "images/image5.jpg",
-      "category": ""
+      "category": "React"
     },
     {
       "id": 5,
-      "name": "Image 1",
+      "name": "Image 6",
       "imageSrc": "images/image6.jpg",
-      "category": ""
+      "category": "React"
     }
   ],
   "comments": [
@@ -46,7 +46,7 @@
       "date": "2018-10-16T17:57:28.556094Z"
     },
     {
-      "dishId": 0,
+      "imageId": 0,
       "id": 1,
       "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
       "author": "Karim",
@@ -60,7 +60,7 @@
       "date": "2018-10-16T17:57:28.556094Z"
     },
     {
-      "dishId": 1,
+      "imageId": 1,
       "id": 3,
       "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
       "author": "Karim",
@@ -74,7 +74,7 @@
       "date": "2018-10-16T17:57:28.556094Z"
     },
     {
-      "dishId": 2,
+      "imageId": 2,
       "id": 1,
       "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
       "author": "Karim",
@@ -88,7 +88,7 @@
       "date": "2018-10-16T17:57:28.556094Z"
     },
     {
-      "dishId": 3,
+      "imageId": 3,
       "id": 6,
       "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
       "author": "Karim",
@@ -102,7 +102,7 @@
       "date": "2018-10-16T17:57:28.556094Z"
     },
     {
-      "dishId": 4,
+      "imageId": 4,
       "id": 8,
       "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
       "author": "Karim",
@@ -116,7 +116,7 @@
       "date": "2018-10-16T17:57:28.556094Z"
     },
     {
-      "dishId": 5,
+      "imageId": 5,
       "id": 10,
       "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
       "author": "Karim",

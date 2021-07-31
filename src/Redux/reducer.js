@@ -1,10 +1,8 @@
-import IMAGES from "../Data/images";
-import COMMENTS from "../Data/comments";
 import * as actionTypes from "./actionTypes";
 
 const INITIAL_STATE = {
-    images: IMAGES,
-    comments: COMMENTS,
+    images: [],
+    comments: [],
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +14,16 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 comments: state.comments.concat(comment),
+            }
+        case actionTypes.LOAD_IMAGES:
+            return {
+                ...state,
+                images: action.payload,
+            }
+        case actionTypes.LOAD_COMMENTS:
+            return {
+                ...state,
+                comments: action.payload,
             }
         default:
             return state;
