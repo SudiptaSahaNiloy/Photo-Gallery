@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
     return ({
         images: state.images,
         comments: state.comments,
+        category: state.category,
     })
 }
 
@@ -49,17 +50,24 @@ class Home extends Component {
 
     render() {
         let image = null;
-        const Category = "General";
+        const Category = this.props.category;
         if (this.props.images !== null) {
-            const images = this.props.images.filter((img) => {
-                return img.category === Category;
-            })
-            image = images.map((img) => {
-                return(
-                     <ImageItem image={img} key={img.id} ImageSelect={this.onImageSelect} />
-                )
-            })
+            if (Category !== null) {
+                const images = this.props.images.filter((img) => {
+                    return img.category === Category;
+                })
+                image = images.map((img) => {
+                    return (
+                        <ImageItem image={img} key={img.id} ImageSelect={this.onImageSelect} />
+                    )
+                })
+            }else{
+                image = this.props.images.map((img) => {
+                    return <ImageItem image={img} key={img.id} ImageSelect={this.onImageSelect} />
+                })
+            }
         }
+
 
         let imageDetail = null;
         if (this.state.selectedImage !== null) {

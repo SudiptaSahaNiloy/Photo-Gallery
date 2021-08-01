@@ -3,6 +3,7 @@ import * as actionTypes from "./actionTypes";
 const INITIAL_STATE = {
     images: [],
     comments: [],
+    category: null,
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -24,6 +25,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 comments: action.payload,
+            }
+        case actionTypes.FILTER_IMAGES:
+            return {
+                ...state,
+                category: action.payload,
             }
         default:
             return state;

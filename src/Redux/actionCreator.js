@@ -14,7 +14,7 @@ export const addComments = (author, comment, imageId) => {
 }
 
 export const loadComments = (comments) => {
-    return{
+    return {
         type: actionTypes.LOAD_COMMENTS,
         payload: comments,
     }
@@ -31,6 +31,13 @@ export const loadImages = (images) => {
     return {
         type: actionTypes.LOAD_IMAGES,
         payload: images,
+    }
+}
+
+export const filterImages = (category) => {
+    return {
+        type: actionTypes.FILTER_IMAGES,
+        payload: category,
     }
 }
 

@@ -1,5 +1,5 @@
 import { Redirect, Route, Switch } from "react-router";
-import Login from "../Auth/Login";
+import Login from "../../Auth/Login";
 import Home from "./Home";
 
 const Body = () => {
