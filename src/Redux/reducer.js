@@ -4,6 +4,8 @@ const INITIAL_STATE = {
     images: [],
     comments: [],
     category: null,
+    idToken: null,
+    localId: null,
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -30,6 +32,18 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 category: action.payload,
+            }
+
+        case actionTypes.AUTH_SUCCESS:
+            return {
+                ...state,
+                idToken: action.payload.idToken,
+                localId: action.payload.localId,
+            }
+        case actionTypes.AUTH_LOGOUT:
+            return {
+                ...state,
+                idToken: action.payload,
             }
         default:
             return state;
