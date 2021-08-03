@@ -25,7 +25,7 @@ export const addComments = (author, comment, imageId) => dispatch => {
     axios.post(baseURL + 'comments.json', newComment)
         .then(response => {
             axios.get(baseURL + 'comments/' + response.data.name + '.json')
-                .then(comment => dispatch(commentConcat(comment.data, response.data.name)))
+                .then(comment => dispatch(commentConcat(comment.data,response.data.name)))
         })
 }
 
