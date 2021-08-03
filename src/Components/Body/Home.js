@@ -44,11 +44,16 @@ class Home extends Component {
     componentDidMount() {
         this.props.fetchImages();
         this.props.fetchComments();
-        // console.log(this.props.comments);
     }
 
 
     render() {
+        // if(this.props.comments.length !== 0){
+        //     Object.entries(this.props.comments).map(item => {
+        //         console.log(item)
+        //     })
+        // }
+
         let image = null;
         const Category = this.props.category;
         if (this.props.images !== null) {
@@ -61,7 +66,7 @@ class Home extends Component {
                         <ImageItem image={img} key={img.id} ImageSelect={this.onImageSelect} />
                     )
                 })
-            }else{
+            } else {
                 image = this.props.images.map((img) => {
                     return <ImageItem image={img} key={img.id} ImageSelect={this.onImageSelect} />
                 })
@@ -71,10 +76,11 @@ class Home extends Component {
 
         let imageDetail = null;
         if (this.state.selectedImage !== null) {
-            const comments = this.props.comments.filter((comment) => {
-                return comment.imageId === this.state.selectedImage.id;
+            const comments = Object.entries(this.props.comments).filter((comment) => {
+                // console.log(comment[1].imageId);
+                return comment[1].imageId === this.state.selectedImage.id;
             })
-            imageDetail = <ImageDetail image={this.state.selectedImage} comments={comments} />
+            imageDetail = <ImageDetail key={this.state.selectedImage.id} image={this.state.selectedImage} comments={comments} />
         }
 
         return (

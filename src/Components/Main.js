@@ -7,7 +7,7 @@ import { Component } from "react";
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        authCheck: () => dispatch(authCheck())
+        authCheck: () => dispatch(authCheck()),
     })
 }
 

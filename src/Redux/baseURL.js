@@ -1,1 +1,1 @@
-export const baseURL = "http://localhost:3001/";
+export const baseURL = "https://gall-store-default-rtdb.asia-southeast1.firebasedatabase.app/";

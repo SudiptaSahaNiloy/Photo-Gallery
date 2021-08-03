@@ -10,13 +10,18 @@ const INITIAL_STATE = {
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
+    // console.log(state.comments);
     switch (action.type) {
         case actionTypes.ADD_COMMENTS:
-            let comment = action.payload;
+            let singleComment = {
+                commentId: action.payload.commentId,
+                comment: action.payload.comment,
+            }
             return {
                 ...state,
-                comments: state.comments.concat(comment),
+                // comments: state.comments.concat(singleComment),
             }
+
         case actionTypes.LOAD_IMAGES:
             return {
                 ...state,

@@ -40,7 +40,7 @@ export const auth = (email, password, mode) => dispatch => {
 
             axios.post(URL + 'lookup?key=' + API_KEY, { idToken: response.data.idToken })
                 .then(userData => {
-                    // console.log(userData.data.users[0]);
+                    // console.log(userData.data.users[0].displayName);
                     localStorage.setItem('displayName', userData.data.users[0].displayName);
                     dispatch(displayName(userData.data.users[0].displayName));
                 });
@@ -77,11 +77,11 @@ const displayName = (userName) => {
 
 
 export const updateUserData = (firstName, lastName) => dispatch => {
+    // console.log(firstName);
     const fullName = firstName + " " + lastName;
     const userData = {
         idToken: localStorage.getItem('idToken'),
         displayName: fullName,
-        photoURL: null,
         deleteAttribute: null,
         returnSecureToken: true,
     }

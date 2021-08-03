@@ -2,10 +2,16 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { baseURL } from "./baseURL";
 
-export const commentConcat = (comment) => ({
-    type: actionTypes.ADD_COMMENTS,
-    payload: comment
-})
+export const commentConcat = (comment, commentId) => {
+    // console.log(comment);
+    return {
+        type: actionTypes.ADD_COMMENTS,
+        payload: {
+            comment: comment,
+            commentId: commentId,
+        },
+    }
+}
 
 export const addComments = (author, comment, imageId) => dispatch => {
     const newComment = {
@@ -16,9 +22,11 @@ export const addComments = (author, comment, imageId) => dispatch => {
 
     newComment.date = new Date().toISOString();
 
-    axios.post(baseURL + 'comments', newComment)
-        .then(response => response.data)
-        .then(comment => dispatch(commentConcat(comment)));
+    axios.post(baseURL + 'comments.json', newComment)
+        .then(response => {
+            axios.get(baseURL + 'comments/' + response.data.name + '.json')
+                .then(comment => dispatch(commentConcat(comment.data, response.data.name)))
+        })
 }
 
 
@@ -30,9 +38,11 @@ export const loadComments = (comments) => {
 }
 
 export const fetchComments = () => dispatch => {
-    axios.get(baseURL + "comments")
+    axios.get(baseURL + "comments.json")
         .then(response => response.data)
-        .then(comments => dispatch(loadComments(comments)))
+        .then(comments => {
+            dispatch(loadComments(comments));
+        })
 }
 
 
@@ -51,7 +61,7 @@ export const filterImages = (category) => {
 }
 
 export const fetchImages = () => dispatch => {
-    axios.get(baseURL + "gallery")
+    axios.get(baseURL + "gallery.json")
         .then(response => response.data)
         .then(images => dispatch(loadImages(images)))
 }

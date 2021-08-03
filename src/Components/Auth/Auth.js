@@ -2,7 +2,8 @@ import { Formik } from "formik";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Form, FormGroup, Input, Col, Row } from 'reactstrap';
-import { auth, updateUserData } from "../../Redux/authActionCreators"
+import { auth, updateUserData } from "../../Redux/authActionCreators";
+import '../../StyleSheet/Auth.css';
 
 const mapStateToProps = (state) => {
     return {
@@ -165,8 +166,11 @@ class Auth extends Component {
 
                             onSubmit={
                                 (values) => {
+                                    // signIn
                                     this.props.auth(values.email, values.password, this.state.authMode);
-                                    if (values.firstName !== null && values.lastName !== null) {
+
+                                    // signUp
+                                    if (this.state.authMode === 'signUp') {
                                         setTimeout(() => {
                                             this.props.updateUserData(values.firstName, values.lastName);
                                         }, 1000);
@@ -203,7 +207,8 @@ class Auth extends Component {
                         >
                             {({ values, handleChange, handleSubmit, errors }) => {
                                 return (
-                                    <div className="p-5" style={{ marginTop: "20%", marginLeft: "5rem", width: "70%", boxShadow: "10px 10px 5px grey" }}>
+                                    // style = {{ marginTop: "20%", marginLeft: "5rem", width: "70%", boxShadow: "10px 10px 5px grey" }}
+                                    <div className="p-5 auth-form">
                                         {this.state.authMode === "signInWithPassword" ?
                                             loginForm(values, handleChange, handleSubmit, errors) : signUpForm(values, handleChange, handleSubmit, errors)}
                                     </div>
