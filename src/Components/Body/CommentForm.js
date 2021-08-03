@@ -13,7 +13,7 @@ class CommentForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            author: '',
+            author: localStorage.getItem('displayName'),
             comment: '',
         };
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -42,7 +42,7 @@ class CommentForm extends Component {
         return (
             <div>
                 <Form onSubmit={this.onSubmitHandler}>
-                    <Input type="text" name="author" value={this.state.author} placeholder="Enter your name" required onChange={this.onChangeHandler} /><br />
+                    {/* <Input type="text" name="author" value={this.state.author} placeholder="Enter your name" required onChange={this.onChangeHandler} /><br /> */}
                     <Input type="textarea" name="comment" value={this.state.comment} placeholder="Enter your comment" required onChange={this.onChangeHandler} /><br />
                     <div className="d-flex justify-content-end">
                         <Button type="submit" color="success">Submit Comment</Button>
