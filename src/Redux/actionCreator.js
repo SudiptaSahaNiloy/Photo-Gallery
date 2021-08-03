@@ -2,16 +2,25 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { baseURL } from "./baseURL";
 
-export const addComments = (author, comment, imageId) => {
-    return {
-        type: actionTypes.ADD_COMMENTS,
-        payload: {
-            author: author,
-            comment: comment,
-            imageId: imageId,
-        }
+export const commentConcat = (comment) => ({
+    type: actionTypes.ADD_COMMENTS,
+    payload: comment
+})
+
+export const addComments = (author, comment, imageId) => dispatch => {
+    const newComment = {
+        author: author,
+        comment: comment,
+        imageId: imageId,
     }
+
+    newComment.date = new Date().toISOString();
+
+    axios.post(baseURL + 'comments', newComment)
+        .then(response => response.data)
+        .then(comment => dispatch(commentConcat(comment)));
 }
+
 
 export const loadComments = (comments) => {
     return {
