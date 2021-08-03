@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Form, FormGroup, Input, Col, Row } from 'reactstrap';
-import { auth } from "../../Redux/authActionCreators"
+import { auth, updateUserData } from "../../Redux/authActionCreators"
 
 const mapStateToProps = (state) => {
     return {
@@ -13,7 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        auth: (firstName, lastName, email, password, mode) => dispatch(auth(firstName, lastName, email, password, mode)),
+        auth: (email, password, mode) => dispatch(auth(email, password, mode)),
+        updateUserData: (firstName, lastName) => dispatch(updateUserData(firstName, lastName)),
     }
 }
 
@@ -23,7 +24,7 @@ class Auth extends Component {
     }
 
     render() {
-        const signUpForm = (values, handleChange, handleSubmit) => {
+        const signUpForm = (values, handleChange, handleSubmit, errors) => {
             return (
                 <Form onSubmit={handleSubmit}>
                     <Row>
@@ -57,6 +58,7 @@ class Auth extends Component {
                                     name="email"
                                     values={values.email}
                                     placeholder="Write your email" />
+                                <span style={{ color: "red" }}>{errors.email}</span>
                             </FormGroup>
                         </Col><br />
                         <Col md={12}>
@@ -67,6 +69,7 @@ class Auth extends Component {
                                     name="password"
                                     values={values.password}
                                     placeholder="Password" />
+                                <span style={{ color: "red" }}>{errors.password}</span>
                             </FormGroup>
                         </Col><br />
                         <Col md={12}>
@@ -77,6 +80,7 @@ class Auth extends Component {
                                     name="confirmPassword"
                                     values={values.confirmPassword}
                                     placeholder="Confirm Password" />
+                                <span style={{ color: "red" }}>{errors.confirmPassword}</span>
                             </FormGroup>
                         </Col><br />
                     </Row>
@@ -100,7 +104,7 @@ class Auth extends Component {
             )
         }
 
-        const loginForm = (values, handleChange, handleSubmit) => {
+        const loginForm = (values, handleChange, handleSubmit, errors) => {
             return (
                 <Form inline onSubmit={handleSubmit}>
                     <FormGroup className="mb-2 me-sm-2 mb-sm-0">
@@ -161,15 +165,47 @@ class Auth extends Component {
 
                             onSubmit={
                                 (values) => {
-                                    this.props.auth(values.firstName, values.lastName, values.email, values.password, this.state.authMode)
+                                    this.props.auth(values.email, values.password, this.state.authMode);
+                                    if (values.firstName !== null && values.lastName !== null) {
+                                        setTimeout(() => {
+                                            this.props.updateUserData(values.firstName, values.lastName);
+                                        }, 1000);
+                                    }
                                 }
                             }
+
+                            validate={(values) => {
+                                // console.log(values);
+                                const errors = {};
+
+                                if (!values.email) {
+                                    errors.email = "**Required";
+                                } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(values.email)) {
+                                    errors.email = "**Invalid Email Address";
+                                }
+
+                                if (!values.password) {
+                                    errors.password = "**Required";
+                                } else if (values.password.length < 4) {
+                                    errors.password = "**Must be at least 4 characters!";
+                                }
+
+                                if (this.state.authMode === 'signUp') {
+                                    if (!values.confirmPassword) {
+                                        errors.confirmPassword = "**Required";
+                                    } else if (values.password !== values.confirmPassword) {
+                                        errors.confirmPassword = "**Password field doesn't match!"
+                                    }
+                                }
+                                // console.log("Errors: ", errors);
+                                return errors;
+                            }}
                         >
-                            {({ values, handleChange, handleSubmit }) => {
+                            {({ values, handleChange, handleSubmit, errors }) => {
                                 return (
                                     <div className="p-5" style={{ marginTop: "20%", marginLeft: "5rem", width: "70%", boxShadow: "10px 10px 5px grey" }}>
                                         {this.state.authMode === "signInWithPassword" ?
-                                            loginForm(values, handleChange, handleSubmit) : signUpForm(values, handleChange, handleSubmit)}
+                                            loginForm(values, handleChange, handleSubmit, errors) : signUpForm(values, handleChange, handleSubmit, errors)}
                                     </div>
                                 )
                             }}

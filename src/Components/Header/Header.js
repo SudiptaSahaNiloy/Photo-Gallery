@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
     return {
         idToken: state.idToken,
         localId: state.localId,
+        displayName: state.displayName,
     }
 }
 
@@ -26,6 +27,10 @@ class Header extends Component {
         category: null,
     }
 
+    componentDidMount() {
+        // console.log(this.props);
+    }
+
     toggle = () => this.setState({ isOpen: !this.state.isOpen });
 
     handleOnClick = (category) => {
@@ -33,6 +38,7 @@ class Header extends Component {
     }
 
     render() {
+        // console.log(this.props);
         const loggedInNavbar = () => {
             return (
                 <Nav className="ms-auto nav " navbar>
@@ -59,19 +65,26 @@ class Header extends Component {
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
+
+                    <UncontrolledDropdown nav inNavbar className="navitem">
+                        <DropdownToggle nav caret className="navlink" style={{ marginTop: "-7px" }}>
+                            Profile
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem>
+                                <NavLink exact activeClassName="selected" to="/" className="navlink">Hi, {this.props.displayName}</NavLink>
+                            </DropdownItem>
+                            <DropdownItem>
+                                <NavLink exact activeClassName="selected" className="navlink" to="/login" onClick={() => this.props.authLogout()}>Logout</NavLink>
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                    {/* <NavItem className="navitem">
+                        <NavLink exact activeClassName="selected" to="/" className="navlink">Hi, {this.props.displayName}</NavLink>
+                    </NavItem>
                     <NavItem className="navitem">
                         <NavLink exact activeClassName="selected" className="navlink" to="/login" onClick={() => this.props.authLogout()}>Logout</NavLink>
-                    </NavItem>
-                </Nav>
-            )
-        }
-
-        const loggedOutNavbar = () => {
-            return (
-                <Nav className="ms-auto nav " navbar>
-                    <NavItem className="navitem">
-                        <NavLink exact activeClassName="selected" className="navlink" to="/login">Login</NavLink>
-                    </NavItem>
+                    </NavItem> */}
                 </Nav>
             )
         }
@@ -83,7 +96,7 @@ class Header extends Component {
                         <NavbarBrand href="/" className="navbar-brand">Gallery Store</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
-                            {this.props.idToken !== null ? loggedInNavbar() : loggedOutNavbar()}
+                            {this.props.idToken !== null ? loggedInNavbar() : null}
                             {/* {loggedOutNavbar()} */}
                         </Collapse>
                     </div>

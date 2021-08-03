@@ -1,6 +1,7 @@
 import * as actionTypes from "./actionTypes";
 
 const INITIAL_STATE = {
+    displayName: null,
     images: [],
     comments: [],
     category: null,
@@ -43,7 +44,14 @@ export const reducer = (state = INITIAL_STATE, action) => {
         case actionTypes.AUTH_LOGOUT:
             return {
                 ...state,
-                idToken: action.payload,
+                idToken: null,
+                localId: null,
+                displayName: null,
+            }
+        case actionTypes.LOAD_USER_DATA:
+            return {
+                ...state,
+                displayName: action.payload,
             }
         default:
             return state;
